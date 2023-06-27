@@ -1,0 +1,77 @@
+ <!-- <form #chartForm = "ngForm" (ngSubmit)="onsubmit(chartForm)">
+<div class="row">
+    <div class="col-md-6">
+   
+   
+            <mat-form-field appearance="fill">
+                <mat-label>
+                    box1
+                </mat-label>
+                <input matInput #box1 ngModel name="box1">
+            </mat-form-field>
+        
+        
+            <mat-form-field appearance="fill">
+                <mat-label>
+                    box2
+                </mat-label>
+                <input matInput #box2 name="box2" ngModel>
+            </mat-form-field>
+        
+       
+
+    <button mat-raised-button color="primary">Create</button>
+  
+</div>  
+    <div class="col-md-6">
+        <canvas baseChart
+      [type]="'pie'"
+      [datasets]="pieChartDatasets"
+      [labels]="pieChartLabels"
+      [options]="pieChartOptions"
+      [plugins]="pieChartPlugins"
+      [legend]="pieChartLegend">
+    </canvas>
+    </div>
+
+</div>
+</form> -->
+<form [formGroup]="chartForm" (ngSubmit)="onSubmitForm()" class="mt-4">
+    <div class="row">
+        <div class="col-sm-6  offset-md-3">
+            <mat-form-field appearance="fill">
+                <mat-label>input 1</mat-label>
+                <input type="text" matInput formControlName="firstValue" (keyup)="onBoxBlur($event)" id="box1">
+                <ng-container *ngIf="chartForm.get('firstValue')?.touched && chartForm.get('firstValue')?.hasError('invalidValue')">
+                    <p class="text-danger">
+                        {{chartForm.get('firstValue')?.errors?.['invalidValue']}}
+                    </p>
+                </ng-container>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="ml-2">
+                <mat-label>input 2</mat-label>
+                <input type="text" matInput formControlName="secondValue" (keyup)="onBoxBlur($event)" id="box2">
+                <ng-container *ngIf="chartForm.get('firstValue')?.touched && chartForm.get('firstValue')?.hasError('invalidValue')">
+                    <p class="text-danger">
+                        {{chartForm.get('firstValue')?.errors?.['invalidValue']}}
+                    </p>
+                </ng-container>
+            </mat-form-field>
+            <label for="button"> &nbsp;</label>
+            <button mat-raised-button color="primary" class="ml-2" [disabled]="chartForm.invalid">Create</button>
+        </div>
+    </div>
+       <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <canvas baseChart
+          [type]="'pie'"
+          [datasets]="pieChartDatasets"
+          [labels]="pieChartLabels"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [legend]="pieChartLegend">
+        </canvas>
+       </div>
+        </div>
+   
+</form>
